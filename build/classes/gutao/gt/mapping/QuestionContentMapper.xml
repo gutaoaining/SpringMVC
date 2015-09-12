@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gutao.gt.dao.QuestionContentMapper">
+	<resultMap id="BaseResultMap" type="gutao.gt.model.QuestionContent">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="pubnishTime" property="pubnishtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="gutao.gt.model.QuestionContent"
+		extends="BaseResultMap">
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, title, username, pubnishTime
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from tquestioncontent
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		tquestioncontent
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="gutao.gt.model.QuestionContent">
+		insert into tquestioncontent
+		(id, title, username,
+		pubnishTime, content)
+		values
+		(#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{pubnishtime,jdbcType=TIMESTAMP},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="gutao.gt.model.QuestionContent">
+		insert into tquestioncontent
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="pubnishtime != null">
+				pubnishTime,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="pubnishtime != null">
+				#{pubnishtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="gutao.gt.model.QuestionContent">
+		update tquestioncontent
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="pubnishtime != null">
+				pubnishTime = #{pubnishtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="gutao.gt.model.QuestionContent">
+		update
+		tquestioncontent
+		set title = #{title,jdbcType=VARCHAR},
+		username =
+		#{username,jdbcType=VARCHAR},
+		pubnishTime =
+		#{pubnishtime,jdbcType=TIMESTAMP},
+		content =
+		#{content,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="gutao.gt.model.QuestionContent">
+		update
+		tquestioncontent
+		set title = #{title,jdbcType=VARCHAR},
+		username =
+		#{username,jdbcType=VARCHAR},
+		pubnishTime =
+		#{pubnishtime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<resultMap id="ContentResultMap" type="gutao.gt.model.QuestionContent"
+		extends="BaseResultMap">
+        <result property="count" column="count"/>
+	</resultMap>
+	<select id="getShow" resultMap="ContentResultMap">
+		SELECT (SELECT COUNT(*) FROM TCOMMENT WHERE TITLEID=tq.id) AS count,
+		tq.title,
+		tq.id,
+		tq.username,
+		tq.content,
+		tq.pubnishTime 
+		FROM
+		tquestioncontent tq
+		ORDER BY
+		tq.pubnishTime DESC
+		LIMIT 0, 3
+	</select>
+</mapper>

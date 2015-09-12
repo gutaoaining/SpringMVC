@@ -1,0 +1,268 @@
+body{
+    margin : 40px 0 0 0;
+	padding : 0;
+	font-size : 12px;
+    font-family : 楷体；
+	background : #fff;
+}
+.ui-widget-header{
+	background : url(../../img/ui_header_bg.png);
+}
+
+/*按钮正常状态的背景*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background:url(../../img/ui_header_bg.png);
+}
+/*按钮点击状态的背景*/
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	background : orange;
+}
+.ui-tooltip{
+	color : #666;
+}
+/*对Email补全框悬停效果进行设置*/
+.ui-menu-item a.ui-state-focus {
+	background : url(../../img/ui_header_bg.png);
+}
+.ui-menu-item a {
+	color : #666;
+}
+/*今天日历日期的样式*/
+.ui-datepicker-today .ui-state-highlight{
+	border : 1px solid #eee;
+	color : red;
+}
+/*选中的日期的样式*/
+.ui-datepicker-current-day .ui-state-active {
+	border:1px solid #eee;
+	color:#06f;
+}
+#header{
+	height : 40px;
+	width : 100%;
+	background : url(../../img/header_bg.png);
+	position : absolute;
+	top : 0;
+}
+#header .header_main{
+	width : 800px;
+	height : 40px;
+	margin : 0 auto;
+}
+#header .header_main h1{
+	height : 40px;
+	line-height : 40px;
+	font-size : 20px;
+	color : #666;
+	margin : 0;
+	padding : 0 10px;
+	float : left;
+}
+#header .header_search{
+	padding : 8px 0 0 0;
+	float : left;
+}
+#header .header_search .search{
+	width : 300px;
+	height : 24px;
+	border : 1px solid #ccc;
+	font-size : 14px;
+	color : #666;
+	text-indent : 5px;
+	
+}
+#header .header_button{
+	float:left;
+	padding : 6px 0 0 4px;
+}
+
+#header .header_member{
+	float : right;
+	height : 40px;
+	line-height : 40px;
+}
+#header .header_member a{
+	 font-size : 14px;
+	 text-decoration : none;
+	 color : #555;
+}
+#reg ,#question{
+	padding : 15px 0 0 20px;
+}
+#reg p ,#question p{
+	margin : 15px 0;
+	padding : 0;
+}
+#reg p label ,#question p label{
+	font-size : 14px;
+	color : #666;
+}
+
+#reg .text,#login .text ,#question .text{ 
+	border-radius : 4px;
+	border : 1px solid #ccc;
+	/*background : #fff;*/
+	width : 200px;
+	height : 25px;
+	line-height : 25px;
+	text-indent : 5px;
+	font-size : 13px;
+	color : #666;
+}
+#reg .star,#login .star ,#question .star{
+	font-size : 14px;
+	color : red;
+}
+#reg .succ,#login .succ ,#question .succ{
+	display : inline-block;
+	width : 50px;
+	background : url(../../img/reg_succ.png) no-repeat;
+}
+/*.valid{
+	background : url(../../img/reg_succ.png) no-repeat right;
+}*/
+/*#reg ol{
+	margin : 0;
+	padding : 0 0 0 20px;
+	color : red;
+}
+#reg ol li {
+	height : 20px;
+}*/
+#loading {
+	background:url(../../img/loading.gif) no-repeat 20px center;
+	line-height:20px;
+	font-size:14px;
+	font-weight:bold;
+	text-indent:40px;
+	color:#666;
+}
+#error {
+	background:url(../../img/error.png) no-repeat 20px center;
+	line-height:20px;
+	font-size:14px;
+	font-weight:bold;
+	text-indent:40px;
+	color:#666;
+}
+#expires {
+	position:relative;
+	top:2px;
+	margin:0 2px 0 125px;
+}
+#main {
+	width:800px;
+	margin:0 auto;
+	padding:10px 0 0 0;
+}
+#main .main_left {
+	width:580px;
+	float:left;
+}
+#main .main_right {
+	width:200px;
+	float:right;
+}
+#tabs {
+	border : none;
+}
+#ui-tabs-1,#ui-tabs-2,#ui-tabs-3 {
+	border:1px solid #aaa;
+	border-top:none;
+	position:relative;
+	top:-2px;
+}
+#accordion{
+}
+.content h4 {
+	color:#666;
+	font-weight:normal;
+}
+.content h3 {
+	color:#369;
+}
+.content .editor {
+	line-height:180%;
+	/*overflow : hidden;*//*溢出部分隐藏*/
+	color:#333;
+}
+.content .bottom {
+	padding:5px 0 0 0;
+}
+.content hr {
+	color:#ccc;
+	height:1px;
+}
+.content .comment {
+	color:#369;
+	cursor:pointer;
+}
+.content .comment_list{
+	border : 1px solid #ccc;
+	border-radius : 4px;
+	padding : 5px 10px;
+	display : none;
+}
+.content .comment_list dl{
+	margin : 0;
+	padding : 3px 0 5px 0;
+}
+.content .comment_list dl dt{
+	margin : 0;
+	padding : 5px 0 0 0;
+	color : #369;
+}
+.content .comment_list dl dd{
+	margin : 0;
+	padding : 0;
+	color : #333;
+	line-height : 180%;
+}
+.content .comment_list dl dd.date{
+	color : #666;
+}
+.content .comment_list dl.comment_content{
+	border-bottom : 1px solid #ccc;
+}
+.content .comment_add{
+	text-align : right;
+}
+.content .comment_add textarea{
+	width : 98%;
+	border : 1px solid #ccc;
+	border-radius : 4px;
+	background : #fff;
+	padding : 5px;
+	font-size : 12px;
+	color : #666;
+	margin : 0 0 5px 0;
+	resize : none;
+}
+.content .load_more {
+	width:100%;
+	margin:10px 0 0 0;
+	height:30px;
+	line-height:30px;
+}
+.content .load_more img {
+	padding:5px 0 0 0;
+}
+.content .up {
+	float:right;
+	color:#369;
+	cursor:pointer;
+}
+.content .down {
+	font-weight:normal;
+	color:#369;
+	cursor:pointer;
+}
+.content .comment_load dd {
+	background:url(../../img/comment_load.gif) no-repeat 75px 45%;
+}
+#footer {
+	clear:both;
+	padding:10px;
+	text-align:center;
+	color:#666;
+}

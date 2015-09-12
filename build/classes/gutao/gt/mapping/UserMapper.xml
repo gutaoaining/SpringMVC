@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gutao.gt.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="gutao.gt.model.User" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CREATEDATETIME" property="createdatetime" jdbcType="TIMESTAMP" />
+    <result column="MODIFYDATETIME" property="modifydatetime" jdbcType="TIMESTAMP" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CREATEDATETIME, MODIFYDATETIME, NAME, PWD, code, email, birthday
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tuser
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tuser
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="gutao.gt.model.User" >
+    insert into tuser (ID, CREATEDATETIME, MODIFYDATETIME, 
+      NAME, PWD, code, email, 
+      birthday)
+    values (#{id,jdbcType=VARCHAR}, #{createdatetime,jdbcType=TIMESTAMP}, #{modifydatetime,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{code,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="gutao.gt.model.User" >
+    insert into tuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="createdatetime != null" >
+        CREATEDATETIME,
+      </if>
+      <if test="modifydatetime != null" >
+        MODIFYDATETIME,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="pwd != null" >
+        PWD,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createdatetime != null" >
+        #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydatetime != null" >
+        #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="gutao.gt.model.User" >
+    update tuser
+    <set >
+      <if test="createdatetime != null" >
+        CREATEDATETIME = #{createdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydatetime != null" >
+        MODIFYDATETIME = #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=BIGINT},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="gutao.gt.model.User" >
+    update tuser
+    set CREATEDATETIME = #{createdatetime,jdbcType=TIMESTAMP},
+      MODIFYDATETIME = #{modifydatetime,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      code = #{code,jdbcType=BIGINT},
+      email = #{email,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getAll" resultMap="BaseResultMap">
+		select * from tuser
+	</select>
+	<resultMap id="UserResultMap" type="gutao.gt.model.User"
+		extends="BaseResultMap">
+		<collection property="roles" javaType="list" ofType="gutao.gt.model.Role">
+		   <id property="id" column="role_id"></id>
+		   <result property="text" column="role_text"/>
+		</collection>
+	</resultMap>
+	
+	<select id="getAllRole" resultMap="UserResultMap">
+		SELECT
+		tuser.ID,
+		tuser.`NAME`,
+		tuserrole.id,
+		trole.text role_text,
+		tuser.CREATEDATETIME,
+		tuser.MODIFYDATETIME,
+		tuser.PWD,
+		tuserrole.userId,
+		tuserrole.roleId,
+		trole.id role_id
+		FROM
+		tuser
+		INNER JOIN tuserrole ON tuserrole.userId = tuser.ID
+		INNER JOIN trole ON tuserrole.roleId = trole.id
+	</select>
+	
+	<select id="checkUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT *
+		FROM
+		tuser u
+		WHERE u.name=#{username,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="checkLogin" resultMap="BaseResultMap" parameterType="gutao.gt.model.User">
+	  select * from tuser u 
+	  WHERE u.NAME=#{name,jdbcType=VARCHAR} and u.PWD=#{pwd,jdbcType=VARCHAR}
+	</select>
+</mapper>
