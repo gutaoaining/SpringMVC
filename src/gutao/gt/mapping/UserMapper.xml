@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="gutao.gt.dao.UserMapper" >
+<mapper namespace="gutao.gt.dao.UserMapper">
   <resultMap id="BaseResultMap" type="gutao.gt.model.User" >
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="CREATEDATETIME" property="createdatetime" jdbcType="TIMESTAMP" />
@@ -14,6 +14,7 @@
   <sql id="Base_Column_List" >
     ID, CREATEDATETIME, MODIFYDATETIME, NAME, PWD, code, email, birthday
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

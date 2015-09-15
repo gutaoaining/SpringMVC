@@ -7,7 +7,6 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 http://www.springframework.org/schema/aop 
 http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 ">
-
     <description>Spring公共配置</description>
  	<!-- 配置数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -21,6 +20,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		<property name="maxActive" value="20" />
 		<!-- 连接池最大空闲 -->
 		<property name="maxIdle" value="20" />
+		
 		<!-- 连接池最小空闲 -->
 		<property name="minIdle" value="0" />
 		<!-- 获取连接最大等待时间 -->
